@@ -11,6 +11,22 @@ $(document).ready(function() {
     url: queryURL,
     method: "GET"
   }).then(function(response) {
+    $(".pokemonSprite").attr("src", response.sprites.front_default);
+    $(".pokemonName").text(response.name);
+    $(".pokemonId").text(response.id);
+    $('.pokemonTypes').text(`Type: ${response.types[0].type.name}`);
+    $('.pokemonHeight').text(`Height:<br/>${response.height}m`);
+    $('.pokemonWeight').text(`Weight:<br/>${response.weight}lbs`);
+    // $('.pokemonDescription').text(`${response}`);
+    console.log(response)
+    $('.pokemonStats').append(`HP:  ${response.stats[5].base_stat}<br/>`);
+    $('.pokemonStats').append(`Attack:  ${response.stats[4].base_stat}<br/>`);
+    $('.pokemonStats').append(`Defense:  ${response.stats[3].base_stat}<br/>`);
+    $('.pokemonStats').append(`Sp.Atk:  ${response.stats[2].base_stat}<br/>`);
+    $('.pokemonStats').append(`Sp.Def:  ${response.stats[1].base_stat}<br/>`);
+    $('.pokemonStats').append(`Speed:  ${response.stats[0].base_stat}`);
+
+
     // Name
     console.log(response.name);
     // Sprites
@@ -45,6 +61,17 @@ $(document).ready(function() {
     console.log(response.stats[1].base_stat);
 
   });
+
+  var flavorURL = "https://pokeapi.co/api/v2/pokemon-species/56";
+
+  $.ajax({
+    url: flavorURL,
+    method: "GET"
+  }).then(function(response){
+    var flavorText = response.flavor_text_entries[2].flavor_text;
+    $(".pokemonDescription").text(flavorText);
+  })
+
 
 // End of $(document).ready(function(){})
 });
