@@ -1,7 +1,14 @@
+@font-face { 
+  font-family: Pokefont; 
+  src: url('../font/poke-font.ttf'); 
+} 
+
 body {
   background: url('../images/grass.jpeg');
   width: 100%;
   height: 100%;
+  font-family: Pokefont;
+  font-size: 14px;
 }
 
 #pokedex {
