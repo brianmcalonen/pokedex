@@ -4,7 +4,8 @@
 } 
 
 body {
-  background: url('../images/grass.jpeg');
+  /* background: url('../images/grass.jpeg'); */
+  background-color: #eff;
   width: 100%;
   height: 100%;
   font-family: Pokefont;
@@ -257,4 +258,22 @@ body {
   border-radius: 6px;
   padding: 10px;
   line-height: 1.4;
+}
+
+.teamContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.teamCard {
+  /* display: flex; */
+  /* height: 100px; */
+  width: 100px;
+  border: 1px solid black;
+  margin: 10px;
+  padding: 10px 5px;
+}
+
+.cardName {
+  text-align: center
 }
