@@ -46,11 +46,22 @@ $(document).ready(function() {
   
       var pokeHeight = Math.round(((response.height) / 10) * 10) / 10;
       var pokeWeight = Math.round((((response.weight) * 2.20462) / 10) * 10) / 10;
+      var pokeName = response.name.charAt(0).toUpperCase() + response.name.slice(1);
+      var pokeTypes = [];
+      for(var i = 0; i < response.types.length; i++){
+        var type = response.types[i].type.name.charAt(0).toUpperCase() + response.types[i].type.name.slice(1);
+        if(!pokeTypes.includes(type)) {
+          pokeTypes.push(type)
+        }
+      }
+      // response.types.each(type => {
+      //   pokeTypes += (type.charAt(0).toUpperCase() + type.slice(1))
+      // })
   
       $(".pokemonSprite").attr("src", response.sprites.front_default);
-      $(".pokemonName").text(response.name);
+      $(".pokemonName").text(`${pokeName}`);
       $(".pokemonId").text(response.id);
-      $('.pokemonTypes').text(`Type: ${response.types[0].type.name}`);
+      $('.pokemonTypes').text(`Type: ${pokeTypes}`);
       $('.pokemonHeight').text(`Height: ${pokeHeight} m`);
       $('.pokemonWeight').text(`Weight: ${pokeWeight} lbs`);
       $('.pokemonStats').append(`HP:  ${response.stats[5].base_stat}<br/>`);
