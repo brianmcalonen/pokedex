@@ -47,20 +47,22 @@ $(document).ready(function() {
       var pokeHeight = Math.round(((response.height) / 10) * 10) / 10;
       var pokeWeight = Math.round((((response.weight) * 2.20462) / 10) * 10) / 10;
       var pokeName = response.name.charAt(0).toUpperCase() + response.name.slice(1);
+      // var flavorText = response.flavor_text;
+
+      console.log(response)
+
       var pokeTypes = [];
       for(var i = 0; i < response.types.length; i++){
         var type = response.types[i].type.name.charAt(0).toUpperCase() + response.types[i].type.name.slice(1);
         if(!pokeTypes.includes(type)) {
-          pokeTypes.push(type)
+          pokeTypes.push(` ${type}`)
         }
       }
-      // response.types.each(type => {
-      //   pokeTypes += (type.charAt(0).toUpperCase() + type.slice(1))
-      // })
-  
+
+      // $(".pokemonDescription").text(flavorText);
       $(".pokemonSprite").attr("src", response.sprites.front_default);
-      $(".pokemonName").text(`${pokeName}`);
-      $(".pokemonId").text(response.id);
+      $(".pokemonName").val(`${pokeName}`);
+      $(".pokemonId").val(response.id);
       $('.pokemonTypes').text(`Type: ${pokeTypes}`);
       $('.pokemonHeight').text(`Height: ${pokeHeight} m`);
       $('.pokemonWeight').text(`Weight: ${pokeWeight} lbs`);
@@ -78,8 +80,14 @@ $(document).ready(function() {
       url: flavorURL,
       method: "GET"
     }).then(function(response){
-      var flavorText = response.flavor_text_entries[2].flavor_text;
-      $(".pokemonDescription").text(flavorText);
+      var flavorText;
+
+      for(var i = 0; i < response.flavor_text_entries.length; i++) {
+        if(response.flavor_text_entries[i].language.name === "en") {
+          flavorText = response.flavor_text_entries[i].flavor_text;
+        }
+      }
+        $(".pokemonDescription").text(flavorText);
     })
   }
 
