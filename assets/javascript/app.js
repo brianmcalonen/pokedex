@@ -30,10 +30,23 @@ $(document).ready(function() {
   $(".rightButton").on("click", function(event) {
     event.preventDefault();
     counter = ++randomNumber;
-
     searchPokemon(counter);
     resetData();
   });
+
+  // const inputValue = $('.pokemonId').val;
+  // console.log(inputValue)
+
+  // Search By ID
+  $('#idForm').on('submit', function(event){
+    event.preventDefault();
+    const inputValue = $('input').val();
+    // var inputValue = $(this).val();
+    console.log(inputValue)
+
+    searchPokemon(inputValue);
+    resetData();
+  })
 
   // Search Pokemon Function
   function searchPokemon(num) {
@@ -61,7 +74,7 @@ $(document).ready(function() {
 
       // $(".pokemonDescription").text(flavorText);
       $(".pokemonSprite").attr("src", response.sprites.front_default);
-      $(".pokemonName").val(`${pokeName}`);
+      $(".pokemonName").text(`${pokeName}`);
       $(".pokemonId").val(response.id);
       $('.pokemonTypes').text(`Type: ${pokeTypes}`);
       $('.pokemonHeight').text(`Height: ${pokeHeight} m`);
