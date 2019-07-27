@@ -7,6 +7,16 @@
   <title>Pokedex</title>
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+  } );
+  </script>
 </head>
 <body>
 
@@ -27,6 +37,7 @@
     <button type="button" class="randomButton">Random</button>
     <button type="button" class="leftButton"><=</button>
     <button type="button" class="rightButton">=></button>
+    <button type="button" class="saveButton">Save</button>
 
     <div class="searchBackground"></div>
     <div class="searchInput"></div>
@@ -49,7 +60,7 @@
   </div>
 
   <!-- Team -->
-  <div class="teamContainer">
+  <div id="sortable" class="teamContainer">
     <div class="teamCard">
       <div class="cardName">Pokemon</div>
       <div class="cardSprite">
@@ -89,7 +100,7 @@
 
   </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script> -->
 <script src="./assets/javascript/app.js"></script>
 </body>
 </html>

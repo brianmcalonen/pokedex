@@ -3,6 +3,20 @@ $(document).ready(function() {
   let randomNumber = Math.floor(Math.random() * 804) + 1;
   let counter;
 
+  // Save to Local Storage
+  $(".saveButton").on("click", function(){
+    const pokemonId = $('input.pokemonId').val();
+
+    console.log(pokemonId)
+    const pokemon = {
+      id: pokemonId
+    }
+
+    window.localStorage.setItem('pokeTeamMember', JSON.stringify(pokemon));
+    
+  });
+
+
   // Random Button Function
   $(".randomButton").on("click", function(event) {
     event.preventDefault();
@@ -14,7 +28,7 @@ $(document).ready(function() {
     resetData();
     searchPokemon(randomNumber);
     
-  })
+  });
 
   // Left Button Function
   $(".leftButton").on("click", function(event) {
