@@ -1,7 +1,6 @@
-let randomNumber = Math.floor(Math.random() * 804) + 1;
 $(document).ready(function() {
 
-  
+  let randomNumber = Math.floor(Math.random() * 804) + 1;
   let counter;
 
   // Random Button Function
@@ -34,18 +33,29 @@ $(document).ready(function() {
     resetData();
   });
 
-  // const inputValue = $('.pokemonId').val;
-  // console.log(inputValue)
-
-  // Search By ID
-  $('#idForm').on('submit', function(event){
+  // Search By Name
+  $('#nameForm').on('submit', function(event){
     event.preventDefault();
-    const inputValue = $('input').val();
+    const inputValue = $('input.pokemonName').val().toLowerCase();
     // var inputValue = $(this).val();
     console.log(inputValue)
 
     searchPokemon(inputValue);
     resetData();
+
+  })
+  // Search By ID
+  $('#idForm').on('submit', function(event){
+    event.preventDefault();
+    const inputValue = $('input.pokemonId').val();
+    // var inputValue = $(this).val();
+    console.log(inputValue)
+
+    if(inputValue > 0 && inputValue < 805) {
+      searchPokemon(inputValue);
+      resetData();
+      
+    }
   })
 
   // Search Pokemon Function
@@ -60,9 +70,6 @@ $(document).ready(function() {
       var pokeHeight = Math.round(((response.height) / 10) * 10) / 10;
       var pokeWeight = Math.round((((response.weight) * 2.20462) / 10) * 10) / 10;
       var pokeName = response.name.charAt(0).toUpperCase() + response.name.slice(1);
-      // var flavorText = response.flavor_text;
-
-      console.log(response)
 
       var pokeTypes = [];
       for(var i = 0; i < response.types.length; i++){
@@ -74,7 +81,7 @@ $(document).ready(function() {
 
       // $(".pokemonDescription").text(flavorText);
       $(".pokemonSprite").attr("src", response.sprites.front_default);
-      $(".pokemonName").text(`${pokeName}`);
+      $(".pokemonName").val(pokeName);
       $(".pokemonId").val(response.id);
       $('.pokemonTypes').text(`Type: ${pokeTypes}`);
       $('.pokemonHeight').text(`Height: ${pokeHeight} m`);
