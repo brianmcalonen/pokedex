@@ -3,38 +3,18 @@ $(document).ready(function() {
   let randomNumber = Math.floor(Math.random() * 804) + 1;
   let counter;
 
-  // Save to Local Storage
-  $(".saveButton").on("click", function(){
-    const pokemonId = $('input.pokemonId').val();
-
-    console.log(pokemonId)
-    const pokemon = {
-      id: pokemonId
-    }
-
-    window.localStorage.setItem('pokeTeamMember', JSON.stringify(pokemon));
-    
-  });
-
-
   // Random Button Function
   $(".randomButton").on("click", function(event) {
     event.preventDefault();
     randomNumber = Math.floor(Math.random() * 804) + 1;
-
-    console.log(randomNumber);
-    console.log("click");
-
     resetData();
     searchPokemon(randomNumber);
-    
   });
 
   // Left Button Function
   $(".leftButton").on("click", function(event) {
     event.preventDefault();
     counter = --randomNumber;
-
     searchPokemon(counter);
     resetData();
   });
@@ -51,24 +31,17 @@ $(document).ready(function() {
   $('#nameForm').on('submit', function(event){
     event.preventDefault();
     const inputValue = $('input.pokemonName').val().toLowerCase();
-    // var inputValue = $(this).val();
-    console.log(inputValue)
-
     searchPokemon(inputValue);
     resetData();
-
   })
+
   // Search By ID
   $('#idForm').on('submit', function(event){
     event.preventDefault();
     const inputValue = $('input.pokemonId').val();
-    // var inputValue = $(this).val();
-    console.log(inputValue)
-
     if(inputValue > 0 && inputValue < 805) {
       searchPokemon(inputValue);
-      resetData();
-      
+      resetData();  
     }
   })
 
@@ -93,7 +66,6 @@ $(document).ready(function() {
         }
       }
 
-      // $(".pokemonDescription").text(flavorText);
       $(".pokemonSprite").attr("src", response.sprites.front_default);
       $(".pokemonName").val(pokeName);
       $(".pokemonId").val(response.id);
@@ -124,6 +96,36 @@ $(document).ready(function() {
         $(".pokemonDescription").text(flavorText);
     })
   }
+
+  // Load Team
+  function loadTeam() {
+    // original array set to 
+    // get ids from localStorage
+    // array of ids
+    // load card 
+  }
+
+  // Save to Local Storage
+  $(".saveButton").on("click", function(){
+    const pokemonId = $('input.pokemonId').val();
+    console.log(`pokemon id: ${pokemonId}`)
+
+    const pokemonTeam = [3,6,9,47,142,150];
+
+    // Set pokemonTeam to localStorage
+    for(let i = 0; i < pokemonTeam.length; i++) {
+      console.log(pokemonTeam[i])
+      window.localStorage.setItem(`pokemon${pokemonTeam[i]}`, JSON.stringify(pokemonTeam[i]));
+    }
+
+    updateLocalStorage()
+  });
+
+  // Delete Pokemon
+  $('.deleteBtn').on("click", function(){
+    console.log("clicked")
+  })
+  
 
   // Reset Data Function
   function resetData() {
