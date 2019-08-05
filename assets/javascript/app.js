@@ -2,11 +2,12 @@ $(document).ready(function() {
 
   let randomNumber = Math.floor(Math.random() * 804) + 1;
   let counter;
+  const pokemonTeam = [1,2,3,4,5,6];
 
   // Random Button Function
   $(".randomButton").on("click", function(event) {
     event.preventDefault();
-    randomNumber = Math.floor(Math.random() * 804) + 1;
+    randomNumber = Math.floor(Math.random() * 802) + 1;
     resetData();
     searchPokemon(randomNumber);
   });
@@ -44,6 +45,33 @@ $(document).ready(function() {
       resetData();  
     }
   })
+
+  // View Button
+  $('.viewBtn').on('click', function(event){
+    event.preventDefault();
+    // const id = 
+    console.log('view clicked')
+  });
+
+  // Delete Button
+  $('.deleteBtn').on('click', function(event){
+    event.preventDefault();
+
+  });
+
+  // Save to Local Storage
+  $(".saveButton").on("click", function(){
+    const pokemonId = $('input.pokemonId').val();
+    console.log(`pokemon id: ${pokemonId}`)
+
+    // Set pokemonTeam to localStorage
+    for(let i = 0; i < pokemonTeam.length; i++) {
+      console.log(pokemonTeam[i])
+      window.localStorage.setItem(`pokemon${pokemonTeam[i]}`, JSON.stringify(pokemonTeam[i]));
+    }
+
+    updateLocalStorage()
+  });
 
   // Search Pokemon Function
   function searchPokemon(num) {
@@ -105,21 +133,17 @@ $(document).ready(function() {
     // load card 
   }
 
-  // Save to Local Storage
-  $(".saveButton").on("click", function(){
-    const pokemonId = $('input.pokemonId').val();
-    console.log(`pokemon id: ${pokemonId}`)
+  // Update Local Storage
+  function updateLocalStorage() {
+    pokemonTeam.shift();
+    window.localStorage.removeItem(`pokemon${pokemonTeam[0]}`);
+    console.log('removed')
 
-    const pokemonTeam = [3,6,9,47,142,150];
+    pokemonTeam.push(pokemonId)
+    window.localStorage.setItem(`pokemon${pokemonId}`, pokemonId);  
 
-    // Set pokemonTeam to localStorage
-    for(let i = 0; i < pokemonTeam.length; i++) {
-      console.log(pokemonTeam[i])
-      window.localStorage.setItem(`pokemon${pokemonTeam[i]}`, JSON.stringify(pokemonTeam[i]));
-    }
-
-    updateLocalStorage()
-  });
+    // renderTeam()
+  }
 
   // Delete Pokemon
   $('.deleteBtn').on("click", function(){
